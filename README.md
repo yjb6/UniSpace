@@ -4,6 +4,8 @@ Official repository for **UniSpace: Patch-Reparameterized Vision Encoders for Un
 
 > **Paper preview.** The project page and paper results are available now. Training code, inference code, evaluation recipes, and model checkpoints will be released here shortly.
 
+[Project page](https://yjb6.github.io/UniSpace/) · [Hugging Face](https://huggingface.co/yjb6/UniSpace)
+
 ## Overview
 
 UniSpace builds a unified visual representation for understanding, image generation, and image editing. Its patch-reparameterized vision encoders retain the semantic prior of pretrained visual backbones while learning the image detail needed for reconstruction and generation.
@@ -43,6 +45,7 @@ UniSpace builds a unified visual representation for understanding, image generat
 ## Release plan
 
 - [x] Paper repository and project page
+- [x] Canonical Hugging Face model repository
 - [x] Paper metrics and qualitative examples
 - [ ] Training and inference code
 - [ ] Evaluation and reproduction recipes
