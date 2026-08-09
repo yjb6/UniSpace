@@ -1,17 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
-  <title id="title">UniSpace abbreviated task mark</title>
-  <desc id="desc">A central U surrounded by UND, EDT, and GEN on two orbital rings.</desc>
+  <title id="title">UniSpace task mark, dark version</title>
+  <desc id="desc">UniSpace connected to visual understanding, editing, and generation.</desc>
   <rect width="720" height="720" fill="#12130f"/>
-  <g fill="none" stroke="#f3f0e8" stroke-opacity=".28" stroke-width="2">
-    <circle cx="360" cy="360" r="286"/>
-    <ellipse cx="360" cy="360" rx="308" ry="184" transform="rotate(-24 360 360)"/>
-    <circle cx="360" cy="360" r="180"/>
+  <g fill="none" stroke="#f3f0e8" stroke-width="6">
+    <circle cx="360" cy="360" r="278"/>
+    <ellipse cx="360" cy="360" rx="303" ry="181" transform="rotate(-24 360 360)"/>
   </g>
-  <circle cx="360" cy="360" r="104" fill="#dfff55"/>
-  <text x="360" y="397" text-anchor="middle" fill="#12130f" font-family="Inter,Arial,sans-serif" font-size="112" font-weight="900">U</text>
-  <g font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" letter-spacing="3" text-anchor="middle">
-    <g transform="translate(360 74)"><rect x="-52" y="-24" width="104" height="48" fill="#f3f0e8"/><text y="9" fill="#12130f">UND</text></g>
-    <g transform="translate(91 480)"><rect x="-48" y="-24" width="96" height="48" fill="#f3f0e8"/><text y="9" fill="#12130f">EDT</text></g>
-    <g transform="translate(633 452)"><rect x="-52" y="-24" width="104" height="48" fill="#ff6b3d"/><text y="9" fill="#12130f">GEN</text></g>
+  <circle cx="360" cy="360" r="108" fill="#dfff55" stroke="#f3f0e8" stroke-width="7"/>
+  <text x="360" y="399" text-anchor="middle" fill="#12130f" font-family="Arial,Helvetica,sans-serif" font-size="116" font-weight="900">U</text>
+  <g transform="translate(360 82)">
+    <circle r="58" fill="#f3f0e8" stroke="#12130f" stroke-width="7"/>
+    <path d="M-37 0C-18-25 18-25 37 0C18 25-18 25-37 0Z" fill="none" stroke="#12130f" stroke-width="7" stroke-linejoin="round"/><circle r="12" fill="#12130f"/>
+  </g>
+  <g transform="translate(96 479)">
+    <circle r="58" fill="#f3f0e8" stroke="#12130f" stroke-width="7"/>
+    <path d="M-25 25L-17-5L17-39L38-18L4 16Z" fill="#ffffff" stroke="#12130f" stroke-width="7" stroke-linejoin="round"/><path d="M-17-5L4 16M13-34L33-13M-25 25L-4 19" fill="none" stroke="#12130f" stroke-width="7"/>
+  </g>
+  <g transform="translate(624 468)">
+    <circle r="58" fill="#ff6b3d" stroke="#12130f" stroke-width="7"/>
+    <path d="M0-38C3-13 13-3 38 0C13 3 3 13 0 38C-3 13-13 3-38 0C-13-3-3-13 0-38Z" fill="#ffffff" stroke="#12130f" stroke-width="5" stroke-linejoin="round"/>
   </g>
 </svg>
