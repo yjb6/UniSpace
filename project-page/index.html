@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="UniSpace unifies visual understanding, reconstruction, and generation in one representation space.">
+  <title>UniSpace — Unified Visual Representation and Scalable Multimodal Modeling</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="release-banner"><strong>Paper preview</strong><span>Project page available now; code and checkpoints are coming soon.</span></div>
+  <header class="hero">
+    <nav>
+      <a class="wordmark" href="#top">UNISPACE</a>
+      <div class="nav-links">
+        <a href="#method">Method</a><a href="#results">Results</a><a href="#models">Models</a><a href="#release">Release</a>
+        <a href="https://github.com/yjb6/UniSpace">Code</a>
+      </div>
+    </nav>
+    <div class="hero-grid" id="top">
+      <div>
+        <p class="eyebrow">UNIFIED VISUAL REPRESENTATION</p>
+        <h1>One space.<br>Three visual abilities.</h1>
+        <p class="lede">UniSpace learns a representation that preserves semantics for understanding and fine detail for reconstruction, then uses the same visual space for generation.</p>
+        <div class="actions">
+          <a class="primary" href="https://github.com/yjb6/UniSpace#readme">Read the reproduction guide</a>
+          <a class="secondary" href="#results">Explore results</a>
+        </div>
+      </div>
+      <div class="space-card" aria-label="UniSpace task overview">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="core">U</div>
+        <span class="sat sat-a">Understand</span>
+        <span class="sat sat-b">Edit</span>
+        <span class="sat sat-c">Generate</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section intro" id="method">
+      <p class="eyebrow">THE METHOD</p>
+      <h2>Patch reparameterization keeps meaning and pixels in view.</h2>
+      <div class="pipeline">
+        <article><span>01</span><h3>Two input spaces</h3><p>Semantic and reconstructive patch embeddings view the same image through complementary projections.</p></article>
+        <article><span>02</span><h3>One shared backbone</h3><p>A frozen pretrained vision transformer preserves its semantic prior while the lightweight reconstructive path learns detail.</p></article>
+        <article><span>03</span><h3>One unified model</h3><p>Qwen3 with Mixture-of-Transformers consumes the visual representation for understanding, editing, and generation.</p></article>
+      </div>
+    </section>
+
+    <section class="section gallery">
+      <div class="section-heading"><div><p class="eyebrow">VISUAL GALLERY</p><h2>Examples produced by the release checkpoint.</h2></div><p>Deterministic samples include their prompt and seed. More generation, reconstruction, and editing examples will be added with the stable release.</p></div>
+      <div class="gallery-label"><span>Complex text-to-image</span><small>Drag or scroll →</small></div>
+      <div class="gallery-track" id="generation-track" aria-label="DPG-Bench generation samples"></div>
+      <div class="gallery-label"><span>Instruction-based image editing</span><small>Input → UniSpace</small></div>
+      <div class="gallery-track edits" id="editing-track" aria-label="GEdit image editing samples"></div>
+      <p class="gallery-note">All examples above are copied directly from the retained <code>0012000</code> benchmark output. No hand-picked external generations are used.</p>
+    </section>
+
+    <section class="section results" id="results">
+      <div class="section-heading"><div><p class="eyebrow">PAPER RESULTS</p><h2>Selected release checkpoints.</h2></div><p>Numbers shown here are the paper results. A full 2,212-image GenEval rerun matches every breakdown; a complete 737-image ImgEdit rerun scores 4.25 overall versus 4.28 in the paper.</p></div>
+      <div class="metric-grid">
+        <article class="metric accent"><strong>0.14</strong><span>PR-DINOv2 reconstruction rFID ↓</span></article>
+        <article class="metric"><strong>29.64</strong><span>SigLIP2 PSNR ↑</span></article>
+        <article class="metric"><strong>2.10</strong><span>PR-DINOv2 unguided generation FID ↓</span></article>
+        <article class="metric"><strong>0.84</strong><span>UniSpace GenEval ↑</span></article>
+        <article class="metric"><strong>86.49</strong><span>UniSpace DPG-Bench ↑</span></article>
+        <article class="metric"><strong>7.40</strong><span>UniSpace GEdit overall ↑</span></article>
+      </div>
+      <p class="provisional">Clean-cluster status — GenEval: 0.98 / 0.92 / 0.69 / 0.88 / 0.83 / 0.73, overall 0.84, exact paper match. ImgEdit: 737/737 judge responses, overall 4.25 versus 4.28. Public artifact hashes and the remaining reproduction logs will accompany the stable release.</p>
+
+      <div class="result-family">
+        <div class="family-heading"><p class="eyebrow">ENCODER RESULTS</p><h3>Patch-reparameterized visual encoders</h3></div>
+
+        <h4>ImageNet-1K reconstruction at 256 × 256</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Encoder</th><th>Training data</th><th>Downsample</th><th>PSNR ↑</th><th>SSIM ↑</th><th>rFID ↓</th></tr></thead>
+          <tbody>
+            <tr><td>PR-SigLIP2</td><td>ImageNet-1K</td><td>16</td><td>29.64</td><td>0.87</td><td>0.18</td></tr>
+            <tr><td>PR-DINOv2</td><td>ImageNet-1K</td><td>14</td><td>30.84</td><td>0.90</td><td>0.14</td></tr>
+            <tr><td>PR-Qwen-ViT</td><td>Web data</td><td>16</td><td>30.16</td><td>0.88</td><td>0.17</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>ImageNet class-conditional generation with DiTDH-XL</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Encoder</th><th>CFG</th><th>gFID ↓</th><th>sFID ↓</th><th>IS ↑</th><th>Precision ↑</th><th>Recall ↑</th></tr></thead>
+          <tbody>
+            <tr><td>PR-SigLIP2</td><td>No</td><td>4.42</td><td>6.66</td><td>190.4</td><td>0.72</td><td>0.65</td></tr>
+            <tr><td>PR-SigLIP2</td><td>Yes</td><td>2.80</td><td>6.05</td><td>248.2</td><td>0.78</td><td>0.61</td></tr>
+            <tr><td>PR-DINOv2</td><td>No</td><td>2.10</td><td>5.39</td><td>217.2</td><td>0.78</td><td>0.64</td></tr>
+            <tr><td>PR-DINOv2</td><td>Yes</td><td>1.87</td><td>4.89</td><td>274.3</td><td>0.82</td><td>0.60</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>Multimodal understanding</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Encoder</th><th>POPE</th><th>GQA</th><th>TextVQA</th><th>MM-Vet</th><th>MMBench</th><th>MME-S</th><th>MME-P</th><th>Avg. ↑</th></tr></thead>
+          <tbody>
+            <tr><td>PR-SigLIP2</td><td>84.80</td><td>61.10</td><td>54.60</td><td>25.50</td><td>65.20</td><td>1741.1</td><td>1447.2</td><td>64.37</td></tr>
+            <tr><td>PR-Qwen-ViT</td><td>86.57</td><td>63.13</td><td>63.68</td><td>30.28</td><td>69.07</td><td>1874.5</td><td>1522.7</td><td>68.94</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="result-family">
+        <div class="family-heading"><p class="eyebrow">UNISPACE RESULTS</p><h3>Unified generation and editing</h3></div>
+
+        <h4>Text-to-image generation</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Benchmark</th><th>Breakdown</th><th>Scores</th><th>Overall ↑</th></tr></thead>
+          <tbody>
+            <tr><td>GenEval</td><td>Single / Two / Count / Color / Position / Attribute</td><td>0.98 / 0.92 / 0.69 / 0.88 / 0.83 / 0.73</td><td>0.84</td></tr>
+            <tr><td>OneIG EN</td><td>Align / Text / Reason / Style / Diversity</td><td>0.860 / 0.937 / 0.311 / 0.467 / 0.233</td><td>0.561</td></tr>
+            <tr><td>OneIG ZH</td><td>Align / Text / Reason / Style / Diversity</td><td>0.807 / 0.881 / 0.276 / 0.455 / 0.244</td><td>0.533</td></tr>
+            <tr><td>DPG-Bench</td><td>Global / Entity / Attribute / Relation / Other</td><td>84.80 / 92.26 / 90.00 / 94.97 / 88.80</td><td>86.49</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>Image editing</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Benchmark</th><th>Breakdown</th><th>Scores</th><th>Overall ↑</th></tr></thead>
+          <tbody>
+            <tr><td>ImgEdit</td><td>Add / Adjust / Extract / Replace / Remove / Background / Style / Hybrid / Action</td><td>4.53 / 4.38 / 3.61 / 4.67 / 4.42 / 4.23 / 4.55 / 2.70 / 4.47</td><td>4.28</td></tr>
+            <tr><td>GEdit EN</td><td>Semantic consistency / Perceptual quality</td><td>8.287 / 7.055</td><td>7.407</td></tr>
+            <tr><td>GEdit ZH</td><td>Semantic consistency / Perceptual quality</td><td>8.270 / 6.998</td><td>7.382</td></tr>
+            <tr><td>GEdit paper aggregate</td><td>Semantic consistency / Perceptual quality</td><td>8.253 / 7.032</td><td>7.399</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <section class="section" id="models">
+      <p class="eyebrow">MODEL FAMILY</p><h2>Three reproducible release lines.</h2>
+      <div class="model-grid">
+        <article><p class="tag">TOKENIZER + DiT</p><h3>PR-SigLIP2</h3><p>Shared SigLIP2 backbone, semantic and reconstruction-aware patch embeddings, unified checkpoint, and ImageNet DiT.</p><a href="#release">Release status →</a></article>
+        <article><p class="tag">TOKENIZER + DiT</p><h3>PR-DINOv2</h3><p>The complete DINOv2 reconstruction and generation line, released alongside PR-SigLIP2.</p><a href="#release">Release status →</a></article>
+        <article><p class="tag">UNDERSTAND + EDIT + GENERATE</p><h3>UniSpace MoT</h3><p>Qwen3-8B, Qwen3Unified visual tokenizer, and task-specialized MLP experts with shared attention.</p><a href="#release">Release status →</a></article>
+      </div>
+    </section>
+
+    <section class="section release" id="release">
+      <p class="eyebrow">RELEASE STATUS</p>
+      <h2>Paper now. Code and reproducibility artifacts next.</h2>
+      <div class="release-grid">
+        <article><strong>Available</strong><p>Project overview, paper metrics, selected qualitative results, and release status.</p></article>
+        <article><strong>Coming soon</strong><p>Training and inference code, public model weights, hashes, benchmark commands, and clean-cluster reproduction logs.</p></article>
+      </div>
+      <p class="release-note">The preview repository deliberately distinguishes original paper measurements from results reproduced using public download paths.</p>
+    </section>
+  </main>
+
+  <footer><span>UniSpace</span><span>Paper preview · Code and weights forthcoming</span></footer>
+  <script>
+    const generations = [0,1,2,3,4,5,6,7,8,9,10,11];
+    const edits = [
+      ['background_change','05040717fb0f2ac80083ef81ee206ace','Change the background to a forest.'],
+      ['color_alter','00644e09e285f614bbfae5883328b4df','Alter the color of the mirror frame to orange.'],
+      ['material_alter','0cf6ae6de96b2d07c717f8c3bf9517fa','Change the cup in hand to ceramic.'],
+      ['motion_change','028b9a3c540ac8eaeef11799524ec127','Make the expression more sorrowful.'],
+      ['style_change','04a128c7a483127cf7ad491c56de17d5','Replace the image style with fantasy art.'],
+      ['subject-add','0523f1c34d1e3312d85b938a7c329885','Add a balloon decoration strip below the airplane.'],
+      ['subject-replace','0051b688bcfc65a4fc1063488eb9da0c','Turn the sleeves into ramen and chopped scallions.'],
+      ['tone_transfer','02f9043a04c5691315d5d690193c955e','Apply an HDR filter and brighten the image.'],
+      ['imgedit-48','48','Add a person sitting at the edge of the wooden dock.'],
+      ['imgedit-667','667','Transfer the image into a sepia-toned vintage photograph.'],
+      ['imgedit-22','22','Add a small brown dog inside the antique car trunk.'],
+      ['imgedit-254','254','Change the forest from autumn to spring.'],
+      ['imgedit-97','97','Add an elegant chandelier in the center of the ceiling.'],
+      ['imgedit-568','568','Replace the dog with a sunflower.'],
+      ['imgedit-646','646','Transfer the image into a high-contrast film-noir style.'],
+      ['imgedit-577','577','Replace the deer with a lion in the same forest.'],
+      ['imgedit-500','500','Remove the yacht from the image.'],
+      ['imgedit-634','634','Replace the pipe-cleaner dragon with a yellow rubber duck.']
+    ];
+    document.querySelector('#generation-track').innerHTML = generations.map(id => `<figure class="generation-card"><div class="sample-crop"><img loading="lazy" src="assets/gallery/dpg-${id}.jpg" alt="UniSpace DPG-Bench sample ${id}"></div><figcaption><strong>DPG-Bench</strong><span>Complex prompt · item ${id}</span></figcaption></figure>`).join('');
+    document.querySelector('#editing-track').innerHTML = edits.map(([task,id,prompt]) => `<figure class="edit-card"><div class="edit-pair"><div><span>Input</span><img loading="lazy" src="assets/gallery/${task}-input.png" alt="Input for ${task}"></div><div><span>UniSpace</span><img loading="lazy" src="assets/gallery/${task}-output.png" alt="UniSpace output for ${task}"></div></div><figcaption><strong>${task.startsWith('imgedit-') ? 'ImgEdit' : 'GEdit · ' + task.replaceAll('_',' ')}</strong><span>${prompt}</span></figcaption></figure>`).join('');
+  </script>
+</body>
+</html>

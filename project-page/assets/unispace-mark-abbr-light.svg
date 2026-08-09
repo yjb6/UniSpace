@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
+  <title id="title">UniSpace abbreviated task mark, light version</title>
+  <desc id="desc">A central U surrounded by UND, EDT, and GEN on two orbital rings.</desc>
+  <rect width="720" height="720" fill="#ffffff"/>
+  <g fill="none" stroke="#12130f" stroke-opacity=".22" stroke-width="2">
+    <circle cx="360" cy="360" r="286"/>
+    <ellipse cx="360" cy="360" rx="308" ry="184" transform="rotate(-24 360 360)"/>
+    <circle cx="360" cy="360" r="180"/>
+  </g>
+  <circle cx="360" cy="360" r="104" fill="#dfff55" stroke="#12130f" stroke-width="2"/>
+  <text x="360" y="397" text-anchor="middle" fill="#12130f" font-family="Inter,Arial,sans-serif" font-size="112" font-weight="900">U</text>
+  <g font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" letter-spacing="3" text-anchor="middle">
+    <g transform="translate(360 74)"><rect x="-52" y="-24" width="104" height="48" fill="#f3f0e8" stroke="#12130f"/><text y="9" fill="#12130f">UND</text></g>
+    <g transform="translate(91 480)"><rect x="-48" y="-24" width="96" height="48" fill="#f3f0e8" stroke="#12130f"/><text y="9" fill="#12130f">EDT</text></g>
+    <g transform="translate(633 452)"><rect x="-52" y="-24" width="104" height="48" fill="#ff6b3d" stroke="#12130f"/><text y="9" fill="#12130f">GEN</text></g>
+  </g>
+</svg>

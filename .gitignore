@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Experiment / runtime artifacts
+ckpts/
+stats/
+wandb/
+kernel_meta/
+exp/
+outputs/
+results/
+eval_results/
+recon_samples/
+monitor/
+cache/
+analysis_*/
+
+# Large binaries — weights are distributed via HuggingFace, see README
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.whl
+
+# IDE / workspace
+.claude/
+.cursor/
+.cursorignore
+.idea/
+.vscode/
+.DS_Store
+
+# Logs
+*.log
+*.local.json
+release-jobs/
+/eval-results/
+/debug-results/
+/dist/
+
+# Local manuscript copy; link the public paper from the project page instead.
+/Patch_Reparameterized_Vision_Encoders_for_Unified_Representation_and_Scalable_Multimodal_Modeling*.pdf
+
+# Withheld until the full code release
+/unispace/
+/patch-reparameterization/
+/docs/
+/tools/
+/THIRD_PARTY.md
+/environment.yml
+/requirements.txt
