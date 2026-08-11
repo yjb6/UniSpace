@@ -1,0 +1,73 @@
+# Release evaluation config for PR-SigLIP2.
+# Set MODEL_ROOT, PR_CHECKPOINT_ROOT, and PR_STATS_ROOT before running.
+stage_1:
+  target: stage1.PatchReparam
+  params:
+    encoder_cls: SigLIP2wTwoBackbone
+    encoder_config_path: ${oc.env:MODEL_ROOT}/siglip2-base-patch16-256/main
+    encoder_input_size: 256
+    encoder_params:
+      sementic_model_name: ${oc.env:MODEL_ROOT}/siglip2-base-patch16-256/main
+      recon_model_name: ${oc.env:MODEL_ROOT}/siglip2-base-patch16-256/main
+      num_tokens: 256
+      recon_post_norm_type: no_norm
+      sementic_post_norm_type: no_norm
+      merger_cls: ConcatMerger
+      merger_kwargs:
+        recon_proj_dim: 128
+        recon_proj_cls: LinearAdapter
+        recon_proj_kwargs: {}
+    decoder_config_path: configs/decoder/ViTXL_nockpt
+    noise_tau: 0.8
+    decode_noise: false
+    reshape_to_2d: true
+  checkpoint:
+    path: ${oc.env:PR_SIGLIP2_TOKENIZER_CKPT}
+    use_ema: true
+
+stage_2:
+  target: stage2.models.DDT.DiTwDDTHead
+  params:
+    input_size: 16
+    patch_size: 1
+    in_channels: 896
+    hidden_size: [1152, 2048]
+    depth: [28, 2]
+    num_heads: [16, 16]
+    mlp_ratio: 4.0
+    class_dropout_prob: 0.1
+    num_classes: 1000
+    use_qknorm: false
+    use_swiglu: true
+    use_rope: true
+    use_rmsnorm: true
+    wo_shift: false
+    use_pos_embed: true
+  ckpt: ${oc.env:PR_CHECKPOINT_ROOT}/pr-siglip2-dit.pt
+
+transport:
+  params:
+    path_type: Linear
+    prediction: velocity
+    loss_weight: null
+    time_dist_type: logit-normal_0_1
+sampler:
+  mode: ODE
+  params: {sampling_method: euler, num_steps: 50, atol: 1.0e-6, rtol: 1.0e-3, reverse: false}
+guidance: {method: cfg, scale: 1.0, t_min: 0.0, t_max: 1.0}
+misc:
+  save_latents: false
+  latent_size: [896, 16, 16]
+  num_classes: 1000
+  time_dist_shift_dim: 229376
+  time_dist_shift_base: 4096
+training:
+  encoder_output_key: merged_tokens_norm
+  sem_dim: 768
+  recon_loss_weight: 18.0
+  normalize_channel_weight: true
+eval:
+  data_path: ${oc.env:IMAGENET_ROOT}/val
+  reference_npz_path: ${oc.env:IMAGENET_VAL_NPZ}
+  metrics: [psnr, ssim, rfid]
+  eval_weights: ema_only

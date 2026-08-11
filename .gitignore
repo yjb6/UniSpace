@@ -44,11 +44,25 @@ release-jobs/
 # Local manuscript copy; link the public paper from the project page instead.
 /Patch_Reparameterized_Vision_Encoders_for_Unified_Representation_and_Scalable_Multimodal_Modeling*.pdf
 
-# Withheld until the full code release
-/unispace/
-/patch-reparameterization/
+# Unreleased training and internal data pipelines
+/unispace/train/
+/unispace/data/*
+!/unispace/data/__init__.py
+!/unispace/data/data_utils.py
+!/unispace/data/rope2d.py
+!/unispace/data/transforms.py
+/patch-reparameterization/src/train*.py
+/patch-reparameterization/src/calculate_stat.py
+/patch-reparameterization/src/build_*.py
+/patch-reparameterization/src/data/
+/patch-reparameterization/src/disc/
+/patch-reparameterization/src/semantic_loss/
+/patch-reparameterization/configs/stage1/
+/patch-reparameterization/configs/stage2/
+/patch-reparameterization/configs/stage3/
+/patch-reparameterization/configs/data/
+/patch-reparameterization/run_stage1*.sh
+/patch-reparameterization/run_dit.sh
+/patch-reparameterization/run_calculate_stat.sh
 /docs/
 /tools/
-/THIRD_PARTY.md
-/environment.yml
-/requirements.txt

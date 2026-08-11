@@ -1,0 +1,31 @@
+{
+  "_comment": "Example eval config for the final SFT/0012000 checkpoint. Copy and edit the paths to point at your downloaded weights, then run: bash scripts/eval/run_gen_gpu_qwen3_mot.sh <this_json>",
+  "ckpt_path": "${UNISPACE_CHECKPOINT}",
+  "step_name": "0012000",
+  "output_base_dir": "./eval/results/sft_0012000",
+  "llm_path": "${MODEL_ROOT}/Qwen/Qwen3-8B",
+  "vae_path": "${REPO_ROOT}/patch-reparameterization/configs/vae/qwen3-temp-run-mar1024_eval.yaml",
+  "llm_type": "qwen3_unified_mot",
+  "vae_type": "qwen3_unified",
+  "project_root": "${REPO_ROOT}/unispace",
+  "disable_val": true,
+  "disable_sft": true,
+  "disable_val_loss": true,
+  "resolution": 1024,
+  "max_latent_size": 96,
+  "cfg_scale": 10,
+  "inference_steps": 50,
+  "extra_gen_args": {
+    "--timestep-shift": "0.112",
+    "--share_unified2llm": "False",
+    "--use_spatial_merge_und": "True"
+  },
+  "edit_extra_gen_args": {
+    "--match-ref-size": "",
+    "--ref-use-mar": ""
+  },
+  "enable_imgedit": true,
+  "enable_gedit": true,
+  "enable_oneig_en": true,
+  "enable_oneig_zh": true
+}

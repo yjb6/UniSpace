@@ -1,0 +1,26 @@
+# Release reconstruction config for PR-Qwen-ViT (Table 3).
+# Set MODEL_ROOT, PR_CHECKPOINT_ROOT, and PR_STATS_ROOT before running.
+stage_1:
+  target: stage1.PatchReparam
+  params:
+    encoder_cls: Qwen3Unified
+    encoder_config_path: ${oc.env:QWEN_MODEL_ROOT}/Qwen/Qwen3-VL-8B-Instruct
+    encoder_input_size: 256
+    encoder_params:
+      model_name: ${oc.env:QWEN_MODEL_ROOT}/Qwen/Qwen3-VL-8B-Instruct
+      recon_proj_dim: 128
+      pixel_format: c_major
+    decoder_config_path: configs/decoder/ViTXL_nockpt
+    decoder_cls: ViTDecoder
+    noise_tau: 0.8
+    reshape_to_2d: true
+    normalization_stat_path: ${oc.env:PR_STATS_ROOT}/pr-qwen-vit-normalization-stats.pt
+  checkpoint:
+    path: ${oc.env:PR_CHECKPOINT_ROOT}/pr-qwen-vit-tokenizer.pt
+    use_ema: true
+
+eval:
+  data_path: ${oc.env:IMAGENET_ROOT}/val
+  reference_npz_path: ${oc.env:IMAGENET_VAL_NPZ}
+  metrics: [psnr, ssim, rfid]
+  eval_weights: ema_only

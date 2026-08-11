@@ -1,0 +1,55 @@
+# Release generation config for PR-DINOv2.
+stage_1:
+  target: stage1.PatchReparam
+  params:
+    encoder_cls: DINOv2Unified
+    encoder_config_path: ${oc.env:MODEL_ROOT}/huggingface.co/facebook/dinov2-with-registers-base
+    encoder_input_size: 224
+    encoder_params:
+      model_name: ${oc.env:MODEL_ROOT}/huggingface.co/facebook/dinov2-with-registers-base
+      recon_proj_dim: 128
+    decoder_config_path: configs/decoder/ViTXL_nockpt
+    noise_tau: 0.8
+    decode_noise: true
+    reshape_to_2d: true
+    normalization_stat_path: ${oc.env:PR_STATS_ROOT}/pr-dinov2-normalization-stats.pt
+    norm_feature: merged_tokens
+  checkpoint:
+    path: ${oc.env:PR_CHECKPOINT_ROOT}/pr-dinov2-tokenizer.pt
+    use_ema: true
+stage_2:
+  target: stage2.models.DDT.DiTwDDTHead
+  params:
+    input_size: 16
+    patch_size: 1
+    in_channels: 896
+    hidden_size: [1152, 2048]
+    depth: [28, 2]
+    num_heads: [16, 16]
+    mlp_ratio: 4.0
+    class_dropout_prob: 0.1
+    num_classes: 1000
+    use_qknorm: false
+    use_swiglu: true
+    use_rope: true
+    use_rmsnorm: true
+    wo_shift: false
+    use_pos_embed: true
+  ckpt: ${oc.env:PR_CHECKPOINT_ROOT}/pr-dinov2-dit.pt
+transport:
+  params: {path_type: Linear, prediction: velocity, loss_weight: null, time_dist_type: logit-normal_0_1}
+sampler:
+  mode: ODE
+  params: {sampling_method: euler, num_steps: 50, atol: 1.0e-6, rtol: 1.0e-3, reverse: false}
+guidance: {method: cfg, scale: 1.0, t_min: 0.0, t_max: 1.0}
+misc:
+  save_latents: false
+  latent_size: [896, 16, 16]
+  num_classes: 1000
+  time_dist_shift_dim: 229376
+  time_dist_shift_base: 4096
+training:
+  encoder_output_key: merged_tokens_norm
+  sem_dim: 768
+  recon_loss_weight: 18.0
+  normalize_channel_weight: true

@@ -144,6 +144,7 @@ The expected artifact layout is:
 checkpoints/UniSpace/
 ├── encoders/
 │   ├── pr-siglip2-tokenizer.pt
+│   ├── pr-siglip2-tokenizer-unified.pt
 │   ├── pr-dinov2-tokenizer.pt
 │   ├── pr-qwen-vit-tokenizer.pt
 │   ├── pr-siglip2-dit.pt
@@ -157,6 +158,8 @@ checkpoints/UniSpace/
 ```
 
 Checkpoint hashes are published as `SHA256SUMS` in the Hugging Face repository.
+The two-backbone SigLIP2 checkpoint reproduces reconstruction; its converted
+unified checkpoint is used by the ImageNet DiT generation config.
 
 ## Reproduce encoder reconstruction
 
@@ -345,7 +348,7 @@ artifacts.
 ```bibtex
 @article{yan2026unispace,
   title   = {UniSpace: Unified Visual Representation and Scalable Multimodal Modeling},
-  author  = {Yan, Jinbo and Qiao, Limeng and Qin, Jie and He, Junyan and Wu, Feize and Wan, Guanglu},
+  author  = {Yan, Jinbo and Qiao, Limeng and Qin, Jie and He, Jun-Yan and Wu, Feize and Wan, Guanglu},
   journal = {arXiv preprint arXiv:2608.08676},
   year    = {2026}
 }
