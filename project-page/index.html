@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="UniSpace unifies visual understanding, reconstruction, and generation in one representation space.">
+  <meta name="description" content="UniSpace: Unified Visual Representation and Scalable Multimodal Modeling.">
   <title>UniSpace — Unified Visual Representation and Scalable Multimodal Modeling</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="release-banner"><strong>Paper preview</strong><span>Project page available now; code and checkpoints are coming soon.</span></div>
+  <div class="release-banner"><strong>Paper released</strong><span>UniSpace is now available on arXiv; checkpoints are available from Hugging Face.</span></div>
   <header class="hero">
     <nav>
       <a class="wordmark" href="#top">UNISPACE</a>
       <div class="nav-links">
-        <a href="#method">Method</a><a href="#results">Results</a><a href="#models">Models</a><a href="#release">Release</a>
+        <a href="#method">Method</a><a href="#results">Results</a><a href="#models">Models</a><a href="#release">Release</a><a href="https://arxiv.org/abs/2608.08676">Paper</a>
         <a href="https://github.com/yjb6/UniSpace">Code</a><a href="https://huggingface.co/yjb6/UniSpace">Hugging Face</a>
       </div>
     </nav>
@@ -23,7 +23,8 @@
         <h1>One space.<br>Three visual abilities.</h1>
         <p class="lede">UniSpace learns a representation that preserves semantics for understanding and fine detail for reconstruction, then uses the same visual space for generation.</p>
         <div class="actions">
-          <a class="primary" href="https://github.com/yjb6/UniSpace#readme">Read the reproduction guide</a>
+          <a class="primary" href="https://arxiv.org/abs/2608.08676">Read the paper</a>
+          <a class="secondary" href="https://github.com/yjb6/UniSpace#reproduce-encoder-reconstruction">Reproduce the results</a>
           <a class="secondary" href="#results">Explore results</a>
           <a class="secondary" href="https://huggingface.co/yjb6/UniSpace">Model hub</a>
         </div>
@@ -142,16 +143,16 @@
 
     <section class="section release" id="release">
       <p class="eyebrow">RELEASE STATUS</p>
-      <h2>Paper now. Code and reproducibility artifacts next.</h2>
+      <h2>Paper and model artifacts are now available.</h2>
       <div class="release-grid">
-        <article><strong>Available</strong><p>Project overview, paper metrics, selected qualitative results, and release status.</p></article>
-        <article><strong>Coming soon</strong><p>Training and inference code, public model weights, hashes, benchmark commands, and clean-cluster reproduction logs.</p></article>
+        <article><strong>Available</strong><p>Paper, project overview, model checkpoints, paper metrics, qualitative results, and reproduction recipes.</p></article>
+        <article><strong>Coming next</strong><p>The cleaned inference and evaluation source release. UniSpace training code and internal data pipelines are not included.</p></article>
       </div>
       <p class="release-note">The preview repository deliberately distinguishes original paper measurements from results reproduced using public download paths.</p>
     </section>
   </main>
 
-  <footer><span>UniSpace</span><span>Paper preview · Code and weights forthcoming</span></footer>
+  <footer><span>UniSpace</span><span><a href="https://arxiv.org/abs/2608.08676">arXiv:2608.08676</a> · Models on Hugging Face</span></footer>
   <script>
     const generations = [0,1,2,3,4,5,6,7,8,9,10,11];
     const edits = [
