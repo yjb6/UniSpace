@@ -8,6 +8,7 @@ Official repository for **UniSpace: Unified Visual Representation and Scalable
 Multimodal Modeling**.
 
 [Paper](https://arxiv.org/abs/2608.08676) ·
+[HF Paper](https://huggingface.co/papers/2608.08676) ·
 [Project page](https://yjb6.github.io/UniSpace/) ·
 [Models](https://huggingface.co/yjb6/UniSpace)
 
