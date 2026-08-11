@@ -145,7 +145,6 @@ The expected artifact layout is:
 checkpoints/UniSpace/
 ├── encoders/
 │   ├── pr-siglip2-tokenizer.pt
-│   ├── pr-siglip2-tokenizer-unified.pt
 │   ├── pr-dinov2-tokenizer.pt
 │   ├── pr-qwen-vit-tokenizer.pt
 │   ├── pr-siglip2-dit.pt
@@ -159,8 +158,8 @@ checkpoints/UniSpace/
 ```
 
 Checkpoint hashes are published as `SHA256SUMS` in the Hugging Face repository.
-The two-backbone SigLIP2 checkpoint reproduces reconstruction; its converted
-unified checkpoint is used by the ImageNet DiT generation config.
+The released PR-SigLIP2 checkpoint uses the unified inference form for both
+reconstruction and ImageNet generation.
 
 ## Reproduce encoder reconstruction
 

@@ -15,7 +15,7 @@ stage_1:
     normalization_stat_path: ${oc.env:PR_STATS_ROOT}/pr-siglip2-normalization-stats.pt
     norm_feature: merged_tokens
   checkpoint:
-    path: ${oc.env:PR_CHECKPOINT_ROOT}/pr-siglip2-tokenizer-unified.pt
+    path: ${oc.env:PR_CHECKPOINT_ROOT}/pr-siglip2-tokenizer.pt
     use_ema: true
 stage_2:
   target: stage2.models.DDT.DiTwDDTHead
@@ -53,4 +53,3 @@ training:
   sem_dim: 768
   recon_loss_weight: 18.0
   normalize_channel_weight: true
-
