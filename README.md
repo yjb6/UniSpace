@@ -154,7 +154,8 @@ checkpoints/UniSpace/
 │   ├── pr-dinov2-normalization-stats.pt
 │   └── pr-qwen-vit-normalization-stats.pt
 └── unispace-sft-0012000/
-    └── model.safetensors
+    ├── model.safetensors.index.json
+    └── model-00001-of-00017.safetensors ... model-00017-of-00017.safetensors
 ```
 
 Checkpoint hashes are published as `SHA256SUMS` in the Hugging Face repository.
